@@ -1,0 +1,32 @@
+{
+  "name": "order-execution-engine",
+  "version": "1.0.0",
+  "description": "DEX Order Execution Engine with WebSocket Updates",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "test": "echo 'Tests coming soon'"
+  },
+  "keywords": ["dex", "order-execution", "websocket", "blockchain"],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "fastify": "^4.26.0",
+    "@fastify/websocket": "^10.0.0",
+    "bullmq": "^5.1.0",
+    "ioredis": "^5.3.0",
+    "mongodb": "^6.3.0",
+    "dotenv": "^16.4.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.0",
+    "@types/node": "^20.11.0",
+    "tsx": "^4.7.0",
+    "nodemon": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
