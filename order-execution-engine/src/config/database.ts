@@ -8,24 +8,27 @@ let db: Db;
 
 export async function connectDatabase(): Promise<Db> {
   try {
-    // Hardcoded connection string (temporary fix)
-    const uri = 'mongodb+srv://yashy7432_db_user:Yashwanth%40123@cluster0.r3jnvbv.mongodb.net/';
-    
+    const uri = process.env.MONGODB_URI;
+
+    if (!uri) {
+      throw new Error('MONGODB_URI is not defined in environment variables');
+    }
+
     console.log('🔄 Connecting to MongoDB Atlas...');
-    
+
     client = new MongoClient(uri);
     await client.connect();
-    
-    db = client.db('orders_db');
-    
+
+    db = client.db(process.env.DB_NAME || 'orders_db');
+
     // Create indexes for performance
     await db.collection('orders').createIndex({ status: 1 });
     await db.collection('orders').createIndex({ createdAt: -1 });
     await db.collection('orders').createIndex({ orderId: 1 }, { unique: true });
-    
+
     console.log('✅ MongoDB connected successfully');
     return db;
-    
+
   } catch (error) {
     console.error('❌ MongoDB connection failed:', error);
     throw error;
